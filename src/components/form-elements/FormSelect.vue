@@ -4,7 +4,7 @@
     <div
       class="form-select__selected"
       :class="{'form-select__selected--empty': value === ''}"
-      @click="showList = !showList"
+      @click="toggleList"
     >
       {{ selectedText }}
     </div>
@@ -13,7 +13,11 @@
       :class="{'form-select__triangle--rotated': showList}"
     />
     
-    <ul class="form-select__list" v-if="showList">
+    <ul
+      class="form-select__list"
+      v-if="showList"
+      v-click-outside="toggleList"
+    >
       <li
         class="form-select__list-item"
         v-for="(value, key) in options"
@@ -62,6 +66,9 @@ export default {
         this.$refs.selectInput.forEach(input => input.checked = false);
         input.checked = true;        
       }
+    },
+    toggleList() {
+      this.showList = !this.showList;
     }
   }
 };

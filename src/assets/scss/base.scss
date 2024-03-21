@@ -4,4 +4,15 @@
 body {
   background-color: $bgColor;
   font-family: "TT Norms", sans-serif;
+  line-height: 1;
+}
+
+.container {
+  max-width: 1180px;
+  padding: 40px;
+  margin: 0 auto;
+
+  @media (max-width: 479px) {
+    padding: 20px;
+  }
 }

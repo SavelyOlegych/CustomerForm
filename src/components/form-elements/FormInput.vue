@@ -5,6 +5,7 @@
       class="form-input__input"
       :type="type"
       :value="value"
+      :placeholder="placeholder"
       @input="$emit('input', $event.currentTarget.value)"
     >
   </label>
@@ -16,6 +17,10 @@ export default {
   props: {
     type: String,
     value: String,
+    placeholder: {
+      type: String,
+      default: "",
+    },
     fieldName: String
   }
 };
@@ -34,8 +39,9 @@ export default {
   &__input {
     border: none;
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 10px 10px;
     outline: none;
+    margin-top: auto;
   }
 }
 </style>
