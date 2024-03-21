@@ -73,6 +73,8 @@ export default {
         this.$refs.selectInput.forEach(input => input.checked = false);
         input.checked = true;
       }
+      
+      this.toggleList();
     },
     toggleList() {
       this.showList = !this.showList;
