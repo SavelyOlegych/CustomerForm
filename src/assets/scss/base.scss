@@ -12,7 +12,15 @@ body {
   padding: 40px;
   margin: 0 auto;
 
-  @media (max-width: 479px) {
+  @media (max-width: 767px) {
     padding: 20px;
   }
+}
+
+.error-text {
+  position: absolute;
+  left: 10px;
+  bottom: -17px;
+  font-size: 14px;
+  color: $errorColor;
 }

@@ -3,11 +3,13 @@
     <span class="form-input__text">{{ fieldName }}</span>
     <input
       class="form-input__input"
+      :class="{'form-input__input--error': error}"
       :type="type"
       :value="value"
       :placeholder="placeholder"
       @input="$emit('input', $event.currentTarget.value)"
     >
+    <span class="error-text" v-if="error">{{ error }}</span>
   </label>
 </template>
 
@@ -21,8 +23,11 @@ export default {
       type: String,
       default: "",
     },
-    fieldName: String
-  }
+    fieldName: String,
+    error: {
+      type: [String, undefined],
+    },
+  },
 };
 </script>
 
@@ -30,18 +35,23 @@ export default {
 .form-input {
   display: flex;
   flex-direction: column;
-  
+  position: relative;
+
   &__text {
     margin-bottom: 3px;
     color: grey;
   }
-  
+
   &__input {
-    border: none;
+    border: 1px solid transparent;
     border-radius: 15px;
     padding: 10px 10px;
     outline: none;
     margin-top: auto;
+
+    &--error {
+      border-color: $errorColor;
+    }
   }
 }
 </style>

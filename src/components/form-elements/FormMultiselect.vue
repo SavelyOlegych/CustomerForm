@@ -3,7 +3,10 @@
     <span class="form-select__text">{{ fieldName }}</span>
     <div
       class="form-select__selected"
-      :class="{'form-select__selected--empty': selected.length === 0}"
+      :class="{
+        'form-select__selected--empty': selected.length === 0,
+        'form-select__selected--error': error
+      }"
       @click="toggleList"
     >
       {{ selectedText }}
@@ -12,7 +15,9 @@
       class="form-select__triangle"
       :class="{'form-select__triangle--rotated': showList}"
     />
-    
+
+    <span class="error-text" v-if="error">{{ error }}</span>
+
     <ul
       class="form-select__list"
       v-if="showList"
@@ -28,6 +33,7 @@
           class="form-select__radio-input"
           type="radio"
           :value="key"
+          :checked="selected.includes(key)"
         >
         <div class="form-select__radio-text">{{ value }}</div>
       </li>
@@ -45,35 +51,36 @@ export default {
     options: Object,
     fieldName: String,
     selected: Array,
+    error: [String, undefined],
   },
   data() {
     return {
       showList: false,
-    }
+    };
   },
   computed: {
     selectedText() {
       return this.selected.length > 0 ?
         this.selected.map(item => this.options[item]).join(", ") :
         "Не выбрано";
-    }
+    },
   },
   methods: {
     clickOption(e) {
       const input = e.currentTarget.querySelector("input");
-      
+
       if (input.checked === true) {
         this.$emit("removeElement", input.value);
       } else {
         this.$emit("addElement", input.value);
       }
-      
+
       input.checked = !input.checked;
     },
     toggleList() {
       this.showList = !this.showList;
-    }
-  }
+    },
+  },
 };
 </script>
 

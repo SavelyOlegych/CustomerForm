@@ -3,7 +3,10 @@
     <span class="form-select__text">{{ fieldName }}</span>
     <div
       class="form-select__selected"
-      :class="{'form-select__selected--empty': value === ''}"
+      :class="{
+        'form-select__selected--empty': value === '',
+        'form-select__selected--error': error,
+      }"
       @click="toggleList"
     >
       {{ selectedText }}
@@ -12,7 +15,9 @@
       class="form-select__triangle"
       :class="{'form-select__triangle--rotated': showList}"
     />
-    
+
+    <span class="error-text" v-if="error">{{ error }}</span>
+
     <ul
       class="form-select__list"
       v-if="showList"
@@ -20,7 +25,7 @@
     >
       <li
         class="form-select__list-item"
-        v-for="(value, key) in options"
+        v-for="(text, key) in options"
         :key="key"
         @click="clickOption"
       >
@@ -28,9 +33,10 @@
           class="form-select__radio-input"
           type="radio"
           :value="key"
+          :checked="key === value"
           ref="selectInput"
         >
-        <div class="form-select__radio-text">{{ value }}</div>
+        <div class="form-select__radio-text">{{ text }}</div>
       </li>
     </ul>
   </div>
@@ -46,31 +52,32 @@ export default {
     options: Object,
     fieldName: String,
     value: String,
+    error: [String, undefined],
   },
   data() {
     return {
       showList: false,
-    }
+    };
   },
   computed: {
     selectedText() {
       return this.value !== "" ? this.options[this.value] : "Не выбрано";
-    }
+    },
   },
   methods: {
     clickOption(e) {
       const input = e.currentTarget.querySelector("input");
 
       if (input.checked === false) {
-        this.$emit("input", input.value)
+        this.$emit("input", input.value);
         this.$refs.selectInput.forEach(input => input.checked = false);
-        input.checked = true;        
+        input.checked = true;
       }
     },
     toggleList() {
       this.showList = !this.showList;
-    }
-  }
+    },
+  },
 };
 </script>
 

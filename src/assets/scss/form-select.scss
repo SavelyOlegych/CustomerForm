@@ -6,22 +6,30 @@
   }
 
   &__selected {
-    padding: 10px 10px;
+    padding: 0 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
     background-color: $whiteColor;
     cursor: pointer;
     border-radius: 15px;
     user-select: none;
     margin-top: 5px;
+    border: 1px solid transparent;
 
     &--empty {
       color: lightgray;
+    }
+    
+    &--error {
+      border-color: $errorColor;
     }
   }
 
   &__triangle {
     position: absolute;
     right: 10px;
-    bottom: 14px;
+    bottom: 16px;
     color: grey;
     transition: transform .3s;
     pointer-events: none;
