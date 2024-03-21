@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="customer-form">
+    <form class="customer-form">
       <div class="customer-form__section">
         <h2 class="customer-form__section-title">Основные данные</h2>
         <div class="customer-form__section-elements">
@@ -76,7 +76,8 @@
           />
         </div>
       </div>
-    </div>
+      <button class="customer-form__button" type="submit">Создать клиента</button>
+    </form>
   </div>
 </template>
 
@@ -182,6 +183,30 @@ export default {
       @media (min-width: 767px) {
         margin-top: 15px;
       }
+    }
+  }
+  
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    font-size: 20px;
+    color: $whiteColor;
+    border-radius: 7px;
+    transition: all .2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color: royalblue;
+    
+    &:hover {
+      border-color: royalblue;
+      color: royalblue;
+      background-color: $whiteColor;
+    }
+    
+    @media (max-width: 479px) {
+      width: 100%;
     }
   }
 }
